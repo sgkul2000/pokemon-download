@@ -23,7 +23,11 @@ func main() {
 		fmt.Println("Please provide valid epidode numbers.")
 		os.Exit(1)
 	}
-	os.Mkdir("Pokemon", 0777)
+
+	if _, err := os.Stat("Pokemon"); os.IsNotExist(err) {
+		fmt.Println("hello")
+		os.Mkdir("Pokemon", 0777)
+	}
 	for ; i <= n; i++ {
 		url := fmt.Sprintf("https://streamcdnuservi4api.in/xiWvvKV/pokmn/pkmn1_IL/Dub/%v_Pokemon_Dubbed_Pokemon360.com.mp4", GetNumber(i))
 		err := DownloadFile(url, fmt.Sprintf("Pokemon/Pokemon-%v", GetNumber(i)))
