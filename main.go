@@ -47,14 +47,14 @@ func main() {
 }
 
 func GetNumber(i int) string {
-	if 1/10 < 1 {
+	if i/10 < 1 {
 		return "0" + fmt.Sprint(i)
 	} else {
 		return fmt.Sprint(i)
 	}
 }
 
-func PrintDownloadPercent(done chan int64, path string, total int64, file string) {
+func PrintDownloadPercent(done chan int64, path string, total int64, filename string) {
 
 	var stop bool = false
 	writer := goterminal.New(os.Stdout)
@@ -64,7 +64,7 @@ func PrintDownloadPercent(done chan int64, path string, total int64, file string
 		case <-done:
 			writer.Clear()
 			writer.Reset()
-			fmt.Printf("Downloaded: %v\n", file)
+			fmt.Printf("Downloaded: %v\n", filename)
 			stop = true
 		default:
 
@@ -88,7 +88,7 @@ func PrintDownloadPercent(done chan int64, path string, total int64, file string
 			// fmt.Println(percent)
 			writer.Clear()
 			// add your text to writer's buffer
-			fmt.Fprintf(writer, "Downloading %v [%v>%v]\n", strings.Repeat("=", int(percent/4)), file, strings.Repeat(" ", int((100-percent)/4)))
+			fmt.Fprintf(writer, "Downloading %v [%v>%v]\n", filename, strings.Repeat("=", int(percent/4)), strings.Repeat(" ", int((100-percent)/4)))
 
 			// write to terminal
 			writer.Print()
